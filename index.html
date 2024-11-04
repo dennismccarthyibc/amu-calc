@@ -173,7 +173,7 @@
                     </div>
                 </div>
 
-                <button type="submit" id="calculateButton" disabled>Calculate Award</button>
+                <button type="submit" id="calculateButton" disabled onclick="scrollToTop()">Calculate Award</button>
             
    
 
@@ -191,6 +191,12 @@
             
         </div>
     </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
     <script src="data.js"></script>
     <script src="calculations.js"></script>
