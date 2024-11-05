@@ -15,7 +15,6 @@ class FormValidation {
         const fit = document.querySelector('input[name="fit"]:checked')?.value;
         const schoolName = document.getElementById('highSchool').value;
         const schoolState = document.getElementById('highSchool').dataset.schoolState;
-        const calculateButton = document.getElementById('calculateButton');
 
         if (gpa && testType && testScore && fit && schoolName && schoolState) {
             const gpaAward = AwardCalculator.calculateGpaAward(gpa);
@@ -31,11 +30,9 @@ class FormValidation {
             document.getElementById('hsAwardInput').value = hsAward;
             document.getElementById('totalAwardInput').value = totalAward;
 
-            // Update button text to show award total
-            calculateButton.textContent = `AWARD: ${AwardCalculator.formatCurrency(totalAward)} SAVE`;
-
-            // Display the total on the screen
-            DisplayManager.showAwards({ gpaAward, testAward, fitAward, hsAward, totalAward });
+            // Display the total award when all fields are validated
+            document.getElementById('totalAward').textContent = AwardCalculator.formatCurrency(totalAward);
+            document.getElementById('awardDisplay').style.display = 'block';
         }
     }
 }
