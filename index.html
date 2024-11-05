@@ -14,13 +14,45 @@
             <img src="G-Logo.png" alt="Logo" class="logo">
         </div>
 
+        <!-- Award Display (initially hidden) -->
+        <div id="awardDisplay" class="award-display" style="display: none;">
+            <div class="card">
+                <h2>Verbal Award</h2>
+               <div class="award-breakdown">
+                    <!--<a href="#" 
+                       style="text-decoration: none; color: #347646;" 
+                       onclick="document.querySelectorAll('.award-row').forEach(row => row.style.display = row.style.display === 'none' ? 'block' : 'none'); return false;">
+                        View Details
+                    </a>-->
+                    <div class="award-row">
+                        <span>GPA Award:</span>
+                        <span id="gpaAward"></span>
+                    </div>
+                    <div class="award-row">
+                        <span>Test Award:</span>
+                        <span id="testAward"></span>
+                    </div>
+                    <div class="award-row">
+                        <span>Fit Award:</span>
+                        <span id="fitAward"></span>
+                    </div>
+                    <div class="award-row">
+                        <span>High School Award:</span>
+                        <span id="hsAward"></span>
+                    </div>
+                </div>
+                <div class="award-total">
+                    <span>Total Award:</span>
+                    <span id="totalAward"></span>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Calculator Form -->
         <div class="card calculator-form">
             <h2>Verbal Academic Scholarship Calculator</h2>
-            <form name="scholarshipForm" style="margin-top: 22px;" method="POST" data-netlify="true">
-                <input type="hidden" name="form-name" value="scholarshipForm" />
-
-                <!-- First Name and Last Name fields -->
+            <form name='scholarshipForm' style="margin-top: 22px;" method='POST' data-netlify="true"><input type='hidden' name='form-name' value='scholarshipForm' />
                 <div class="form-group">
                     <div style="display: flex; gap: 10px;">
                         <div style="flex: 1;">
@@ -34,32 +66,52 @@
                     </div>
                 </div>
 
-                <!-- Mobile Phone and Email fields -->
                 <div class="form-group">
                     <div style="display: flex; gap: 10px;">
                         <div style="flex: 1;">
                             <label for="mobilePhone">Mobile Phone:</label>
-                            <input type="tel" id="mobilePhone" name="mobilePhone" pattern="[0-9]{10}" required>
+                            <input type="tel" id="mobilePhone" name="mobilePhone" 
+                                   pattern="[0-9]{10}" required
+                                   style="width: 100%; padding: 8px 12px; border: 1px solid #e2e8f0; 
+                                          border-radius: 6px; background-color: #fafafa; height: 40px; font-size: 17px;">
                         </div>
                         <div style="flex: 1;">
                             <label for="email">Email Address:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required
+                                   style="width: 100%; padding: 8px 12px; border: 1px solid #e2e8f0; 
+                                          border-radius: 6px; background-color: #fafafa; height: 40px; font-size: 17px;">
                         </div>
                     </div>
                 </div>
+                
+                  <div class="form-group"><label for="sport">Sport</label>
+    <select id="sport" name="sport">
+<option value="none">Select sport...</option>
+<option value="Football">Football</option>
+<option value="Men's Baseball">Men's Baseball</option>
+<option value="Men's Basketball">Men's Basketball</option>
+<option value="Men's Cross Country">Men's Cross Country</option>
+<option value="Men's Golf">Men's Golf</option>
+<option value="Men's Rugby">Men's Rugby</option>
+<option value="Men's Soccer">Men's Soccer</option>
+<option value="Men's Swimming">Men's Swimming</option>
+<option value="Men's Tennis">Men's Tennis</option>
+<option value="Men's Track and Field">Men's Track and Field</option>
+<option value="Men's Ultimate Frisbee">Men's Ultimate Frisbee</option>
+<option value="Women's Basketball">Women's Basketball</option>
+<option value="Women's Beach Volleyball">Women's Beach Volleyball</option>
+<option value="Women's Competitive Dance">Women's Competitive Dance</option>
+<option value="Women's Cross Country">Women's Cross Country</option>
+<option value="Women's Golf">Women's Golf</option>
+<option value="Women's Lacrosse">Women's Lacrosse</option>
+<option value="Women's Soccer">Women's Soccer</option>
+<option value="Women's Softball">Women's Softball</option>
+<option value="Women's Swimming">Women's Swimming</option>
+<option value="Women's Tennnis">Women's Tennnis</option>
+<option value="Women's Track and Field">Women's Track and Field</option>
+<option value="Women's Volleyball">Women's Volleyball</option>
+                      </select></div>
 
-                <!-- Sport selection -->
-                <div class="form-group">
-                    <label for="sport">Sport</label>
-                    <select id="sport" name="sport">
-                        <option value="none">Select sport...</option>
-                        <option value="Football">Football</option>
-                        <option value="Men's Baseball">Men's Baseball</option>
-                        <!-- Add other sports as needed -->
-                    </select>
-                </div>
-
-                <!-- GPA selection -->
                 <div class="form-group">
                     <label for="gpa">High School GPA Range</label>
                     <select id="gpa" name="gpa" required>
@@ -67,7 +119,6 @@
                     </select>
                 </div>
 
-                <!-- Standardized Test Type -->
                 <div class="form-group">
                     <label>Standardized Test Type</label>
                     <div class="radio-group" id="testTypeGroup">
@@ -86,7 +137,6 @@
                     </div>
                 </div>
 
-                <!-- Test Score selection -->
                 <div class="form-group" id="testScoreGroup" style="display: none;">
                     <label id="testScoreLabel">Score Range</label>
                     <select id="testScore" name="testScore" required>
@@ -94,7 +144,6 @@
                     </select>
                 </div>
 
-                <!-- Fit Level -->
                 <div class="form-group">
                     <label>Fit</label>
                     <div class="radio-group" id="fitGroup">
@@ -117,7 +166,6 @@
                     </div>
                 </div>
 
-                <!-- High School selection -->
                 <div class="form-group">
                     <label for="highSchool">High School</label>
                     <div class="search-container">
@@ -126,50 +174,36 @@
                     </div>
                 </div>
 
-                <!-- Verbal Award Display Block (moved above the button) -->
-                <div id="awardDisplay" class="award-display" style="display: none;">
-                    <div class="card">
-                        <h2>Verbal Award</h2>
-                        <div class="award-breakdown">
-                            <div class="award-row">
-                                <span>GPA Award:</span>
-                                <span id="gpaAward"></span>
-                            </div>
-                            <div class="award-row">
-                                <span>Test Award:</span>
-                                <span id="testAward"></span>
-                            </div>
-                            <div class="award-row">
-                                <span>Fit Award:</span>
-                                <span id="fitAward"></span>
-                            </div>
-                            <div class="award-row">
-                                <span>High School Award:</span>
-                                <span id="hsAward"></span>
-                            </div>
-                        </div>
-                        <div class="award-total">
-                            <span>Total Award:</span>
-                            <span id="totalAward"></span>
-                        </div>
-                    </div>
-                </div>
+                <button type="submit" id="calculateButton" disabled onclick="scrollToTop()">Calculate Award</button>
+            
+   
 
-                <!-- Save Button -->
-                <button type="button" id="calculateButton">SAVE</button>
+</form>
 
-                <!-- Reset Button -->
-                <div class="button-container" style="text-align: center; margin-top: 12px;">
-                    <a style="text-decoration: none; color: #347646;" href="#" onclick="location.reload(); return false;" class="reset-button">Reset</a>
-                </div>
-            </form>
+            <div class="button-container" style="text-align: center; margin-top: 12px;">
+                <a style="text-decoration: none; color: #347646;" href="#" onclick="location.reload(); return false;" class="reset-button">Reset</a>
+            </div>
+            
+            <a href="#" id="sendToGoogleSheets" 
+   style="display: block; text-align: center; margin-top: 10px; color: #2563eb; text-decoration: none;">
+   Send Data to Air Table
+</a>
+
+            
         </div>
     </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
     <script src="data.js"></script>
     <script src="calculations.js"></script>
     <script src="form-validation.js"></script>
-    <script src="form-handlers.js"></script>
+        <script src="form-handlers.js"></script>
+
     <script src="display-manager.js"></script>
     <script src="script.js"></script>
 </body>
