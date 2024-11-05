@@ -20,7 +20,7 @@
             <form name="scholarshipForm" style="margin-top: 22px;" method="POST" data-netlify="true">
                 <input type="hidden" name="form-name" value="scholarshipForm" />
 
-                <!-- Other form fields here -->
+                <!-- First Name and Last Name fields -->
                 <div class="form-group">
                     <div style="display: flex; gap: 10px;">
                         <div style="flex: 1;">
@@ -34,17 +34,95 @@
                     </div>
                 </div>
 
+                <!-- Mobile Phone and Email fields -->
                 <div class="form-group">
                     <div style="display: flex; gap: 10px;">
                         <div style="flex: 1;">
                             <label for="mobilePhone">Mobile Phone:</label>
-                            <input type="tel" id="mobilePhone" name="mobilePhone" 
-                                   pattern="[0-9]{10}" required>
+                            <input type="tel" id="mobilePhone" name="mobilePhone" pattern="[0-9]{10}" required>
                         </div>
                         <div style="flex: 1;">
                             <label for="email">Email Address:</label>
                             <input type="email" id="email" name="email" required>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Sport selection -->
+                <div class="form-group">
+                    <label for="sport">Sport</label>
+                    <select id="sport" name="sport">
+                        <option value="none">Select sport...</option>
+                        <option value="Football">Football</option>
+                        <option value="Men's Baseball">Men's Baseball</option>
+                        <!-- Add other sports as needed -->
+                    </select>
+                </div>
+
+                <!-- GPA selection -->
+                <div class="form-group">
+                    <label for="gpa">High School GPA Range</label>
+                    <select id="gpa" name="gpa" required>
+                        <option value="">Select GPA range</option>
+                    </select>
+                </div>
+
+                <!-- Standardized Test Type -->
+                <div class="form-group">
+                    <label>Standardized Test Type</label>
+                    <div class="radio-group" id="testTypeGroup">
+                        <div class="radio-option">
+                            <input type="radio" id="ACT" name="testType" value="ACT">
+                            <label for="ACT">ACT</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="SAT" name="testType" value="SAT">
+                            <label for="SAT">SAT</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="CLT" name="testType" value="CLT">
+                            <label for="CLT">CLT</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Score selection -->
+                <div class="form-group" id="testScoreGroup" style="display: none;">
+                    <label id="testScoreLabel">Score Range</label>
+                    <select id="testScore" name="testScore" required>
+                        <option value="">Select score range</option>
+                    </select>
+                </div>
+
+                <!-- Fit Level -->
+                <div class="form-group">
+                    <label>Fit</label>
+                    <div class="radio-group" id="fitGroup">
+                        <div class="radio-option">
+                            <input type="radio" id="acceptable" name="fit" value="Acceptable Fit">
+                            <label for="acceptable">Acceptable Fit</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="solid" name="fit" value="Solid Fit">
+                            <label for="solid">Solid Fit</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="veryGood" name="fit" value="Very Good Fit">
+                            <label for="veryGood">Very Good Fit</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="exceptional" name="fit" value="Exceptional Fit">
+                            <label for="exceptional">Exceptional Fit</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High School selection -->
+                <div class="form-group">
+                    <label for="highSchool">High School</label>
+                    <div class="search-container">
+                        <input type="text" id="highSchool" placeholder="Search by name or zip..." autocomplete="off">
+                        <div id="schoolResults" class="search-results"></div>
                     </div>
                 </div>
 
@@ -77,10 +155,10 @@
                     </div>
                 </div>
 
-                <!-- Button to save the calculated award -->
+                <!-- Save Button -->
                 <button type="button" id="calculateButton">SAVE</button>
 
-                <!-- Reset button as before -->
+                <!-- Reset Button -->
                 <div class="button-container" style="text-align: center; margin-top: 12px;">
                     <a style="text-decoration: none; color: #347646;" href="#" onclick="location.reload(); return false;" class="reset-button">Reset</a>
                 </div>
