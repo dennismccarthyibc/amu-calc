@@ -33,6 +33,12 @@ class FormValidation {
             // Display the total award when all fields are validated
             document.getElementById('totalAward').textContent = AwardCalculator.formatCurrency(totalAward);
             document.getElementById('awardDisplay').style.display = 'block';
+
+            // Debugging log to confirm display update
+            console.log('All fields validated. Total Award:', totalAward);
+        } else {
+            // Hide award display if form is incomplete
+            document.getElementById('awardDisplay').style.display = 'none';
         }
     }
 }
