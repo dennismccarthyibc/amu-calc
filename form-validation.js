@@ -26,6 +26,6 @@ class FormValidation {
         console.log('Is Form Valid:', isValid);  // Log form validity state
 
         // Enable or disable the submit button based on form validity
-        calculateButton.disabled = !isValid;
+       // calculateButton.disabled = !isValid;
     }
 }
