@@ -21,9 +21,16 @@ class FormValidation {
     console.log('GPA:', gpa, 'Test Type:', testType, 'Test Score:', testScore);
     console.log('Fit:', fit, 'School Name:', schoolName, 'School State:', schoolState);
 
-    // Only require testScore if a test type other than "none" is selected
-    const isValid = gpa && testType && (testType === 'none' || testScore) && fit && schoolName && schoolState;
+    // Update validation logic to only require testScore if testType is not "none"
+    let isValid = gpa && testType && fit && schoolName && schoolState;
+
+    // If a test type other than "No Test" is selected, ensure testScore is provided
+    if (testType !== 'none') {
+        isValid = isValid && testScore;
+    }
+
     console.log('Is Form Valid:', isValid);
 
+    // Enable or disable the Save button based on form validity
     calculateButton.disabled = !isValid;
 }
