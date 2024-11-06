@@ -214,5 +214,35 @@
     <script src="form-validation.js"></script>
     <script src="display-manager.js"></script>
     <script src="script.js"></script>
+
+<script>document.getElementById('scholarshipForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Calculate award values
+    const gpaAward = AwardCalculator.calculateGpaAward(parseFloat(document.getElementById('gpa').value));
+    const testAward = AwardCalculator.calculateTestAward(document.querySelector('input[name="testType"]:checked').value, parseFloat(document.getElementById('testScore').value));
+    const fitAward = AwardCalculator.calculateFitAward(document.querySelector('input[name="fit"]:checked').value);
+    const hsAward = parseInt(document.getElementById('highSchool').dataset.schoolScore) || 0;
+    const totalAward = gpaAward + testAward + fitAward + hsAward;
+
+    // Update display elements
+    document.getElementById('gpaAward').textContent = AwardCalculator.formatCurrency(gpaAward);
+    document.getElementById('testAward').textContent = AwardCalculator.formatCurrency(testAward);
+    document.getElementById('fitAward').textContent = AwardCalculator.formatCurrency(fitAward);
+    document.getElementById('hsAward').textContent = AwardCalculator.formatCurrency(hsAward);
+    document.getElementById('totalAward').textContent = AwardCalculator.formatCurrency(totalAward);
+    document.getElementById('awardDisplay').style.display = 'block';
+
+    // Populate hidden fields
+    document.getElementById('hiddenGpaAward').value = gpaAward;
+    document.getElementById('hiddenTestAward').value = testAward;
+    document.getElementById('hiddenFitAward').value = fitAward;
+    document.getElementById('hiddenHsAward').value = hsAward;
+    document.getElementById('hiddenTotalAward').value = totalAward;
+
+    // Submit the form programmatically to ensure hidden fields are included
+    e.target.submit();
+});</script>
+    
 </body>
 </html>
