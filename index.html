@@ -173,6 +173,7 @@
                         <div id="schoolResults" class="search-results"></div>
                     </div>
                 </div>
+<button type="button" id="verbalAwardButton">Verbal Award</button>
 
                 <button type="submit" id="calculateButton">Calculate Award</button>
             
@@ -188,10 +189,10 @@
                 <a style="text-decoration: none; color: #347646;" href="#" onclick="location.reload(); return false;" class="reset-button">Reset</a>
             </div>
             
-            <a href="#" id="sendToGoogleSheets" 
+          <!--  <a href="#" id="sendToGoogleSheets" 
    style="display: block; text-align: center; margin-top: 10px; color: #2563eb; text-decoration: none;">
    Send Data to Air Table
-</a>
+</a>-->
 
             
         </div>
@@ -236,6 +237,19 @@
         document.getElementById('testScore').addEventListener('change', updateAwards);
         document.querySelectorAll('input[name="fit"]').forEach(el => el.addEventListener('change', updateAwards));
         document.getElementById('highSchool').addEventListener('change', updateAwards);
+    });
+</script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const verbalAwardButton = document.getElementById('verbalAwardButton');
+        const totalAwardInput = document.getElementById('totalAwardInput');
+
+        verbalAwardButton.addEventListener("click", function() {
+            // Display the awardTotal value as the button label
+            const awardTotal = totalAwardInput.value || "0";  // Default to "0" if not yet calculated
+            verbalAwardButton.textContent = `Award Total: ${awardTotal}`;
+        });
     });
 </script>
     
