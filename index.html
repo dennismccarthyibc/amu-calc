@@ -176,7 +176,11 @@
 
                 <button type="submit" id="calculateButton">Calculate Award</button>
             
-   
+   <input type="hidden" id="gpaAwardInput" name="gpaAward">
+<input type="hidden" id="testAwardInput" name="testAward">
+<input type="hidden" id="fitAwardInput" name="fitAward">
+<input type="hidden" id="hsAwardInput" name="hsAward">
+<input type="hidden" id="totalAwardInput" name="totalAward">
 
 </form>
 
@@ -206,5 +210,34 @@
 
     <script src="display-manager.js"></script>
     <script src="script.js"></script>
+
+<script>
+    // Inline JavaScript to populate hidden fields with award values as they are calculated
+    document.addEventListener("DOMContentLoaded", function() {
+        function updateAwards() {
+            // Get the calculated values (replace these with your actual calculation logic)
+            const gpaAward = AwardCalculator.calculateGpaAward(parseFloat(document.getElementById('gpa').value) || 0);
+            const testAward = AwardCalculator.calculateTestAward(document.querySelector('input[name="testType"]:checked')?.value, parseFloat(document.getElementById('testScore').value) || 0);
+            const fitAward = AwardCalculator.calculateFitAward(document.querySelector('input[name="fit"]:checked')?.value);
+            const hsAward = AwardCalculator.calculateHsAward(document.getElementById('highSchool').value, document.getElementById('highSchool').dataset.schoolState);
+            const totalAward = gpaAward + testAward + fitAward + hsAward;
+
+            // Update hidden fields
+            document.getElementById('gpaAwardInput').value = gpaAward;
+            document.getElementById('testAwardInput').value = testAward;
+            document.getElementById('fitAwardInput').value = fitAward;
+            document.getElementById('hsAwardInput').value = hsAward;
+            document.getElementById('totalAwardInput').value = totalAward;
+        }
+
+        // Attach the update function to input changes
+        document.getElementById('gpa').addEventListener('change', updateAwards);
+        document.querySelectorAll('input[name="testType"]').forEach(el => el.addEventListener('change', updateAwards));
+        document.getElementById('testScore').addEventListener('change', updateAwards);
+        document.querySelectorAll('input[name="fit"]').forEach(el => el.addEventListener('change', updateAwards));
+        document.getElementById('highSchool').addEventListener('change', updateAwards);
+    });
+</script>
+    
 </body>
 </html>
