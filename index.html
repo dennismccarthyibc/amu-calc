@@ -232,33 +232,41 @@
     document.getElementById('verbalAwardDisplay').style.display = 'block';
 });</script>
 
-<script>document.getElementById('scholarshipForm').addEventListener('submit', (e) => {
+<script>document.getElementById('getVerbalAwardLink').addEventListener('click', (e) => {
     e.preventDefault();
 
-    // Calculate award values
-    const gpaAward = AwardCalculator.calculateGpaAward(parseFloat(document.getElementById('gpa').value));
-    const testAward = AwardCalculator.calculateTestAward(document.querySelector('input[name="testType"]:checked').value, parseFloat(document.getElementById('testScore').value));
-    const fitAward = AwardCalculator.calculateFitAward(document.querySelector('input[name="fit"]:checked').value);
-    const hsAward = parseInt(document.getElementById('highSchool').dataset.schoolScore) || 0;
-    const totalAward = gpaAward + testAward + fitAward + hsAward;
+    try {
+        // Calculate award values
+        const gpaAward = AwardCalculator.calculateGpaAward(parseFloat(document.getElementById('gpa').value));
+        const testAward = AwardCalculator.calculateTestAward(document.querySelector('input[name="testType"]:checked').value, parseFloat(document.getElementById('testScore').value));
+        const fitAward = AwardCalculator.calculateFitAward(document.querySelector('input[name="fit"]:checked').value);
+        const hsAward = parseInt(document.getElementById('highSchool').dataset.schoolScore) || 0;
+        const totalAward = gpaAward + testAward + fitAward + hsAward;
 
-    // Update display elements
-    document.getElementById('gpaAward').textContent = AwardCalculator.formatCurrency(gpaAward);
-    document.getElementById('testAward').textContent = AwardCalculator.formatCurrency(testAward);
-    document.getElementById('fitAward').textContent = AwardCalculator.formatCurrency(fitAward);
-    document.getElementById('hsAward').textContent = AwardCalculator.formatCurrency(hsAward);
-    document.getElementById('totalAward').textContent = AwardCalculator.formatCurrency(totalAward);
-    document.getElementById('awardDisplay').style.display = 'block';
+        // Display total award in the verbal award display section
+        document.getElementById('verbalAwardDisplay').textContent = `Total Award: ${AwardCalculator.formatCurrency(totalAward)}`;
+        document.getElementById('verbalAwardDisplay').style.display = 'block';
 
-    // Populate hidden fields
-    document.getElementById('hiddenGpaAward').value = gpaAward;
-    document.getElementById('hiddenTestAward').value = testAward;
-    document.getElementById('hiddenFitAward').value = fitAward;
-    document.getElementById('hiddenHsAward').value = hsAward;
-    document.getElementById('hiddenTotalAward').value = totalAward;
+        // Populate hidden fields
+        document.getElementById('hiddenGpaAward').value = gpaAward;
+        document.getElementById('hiddenTestAward').value = testAward;
+        document.getElementById('hiddenFitAward').value = fitAward;
+        document.getElementById('hiddenHsAward').value = hsAward;
+        document.getElementById('hiddenTotalAward').value = totalAward;
 
-    // Submit the form programmatically to ensure hidden fields are included
-    e.target.submit();
+        console.log("Hidden fields populated successfully:", {
+            gpaAward,
+            testAward,
+            fitAward,
+            hsAward,
+            totalAward
+        });
+
+    } catch (error) {
+        console.error("Error populating hidden fields or calculating awards:", error);
+    }
+});
+
 });</script>
     
 </body>
