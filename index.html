@@ -53,7 +53,8 @@
         <!-- Calculator Form -->
         <div class="card calculator-form">
             <h2>Verbal Academic Scholarship Calculator</h2>
-            <form id="scholarshipForm" style="margin-top: 22px;">
+                <form netlify name="scholarshipForm" style="margin-top: 22px;" method="POST" data-netlify="true">
+
                 <div class="form-group">
                     <div style="display: flex; gap: 10px;">
                         <div style="flex: 1;">
@@ -174,6 +175,13 @@
                         <div id="schoolResults" class="search-results"></div>
                     </div>
                 </div>
+
+                    <!-- Hidden Fields for Award Data -->
+    <input type="hidden" id="hiddenGpaAward" name="gpaAward">
+    <input type="hidden" id="hiddenTestAward" name="testAward">
+    <input type="hidden" id="hiddenFitAward" name="fitAward">
+    <input type="hidden" id="hiddenHsAward" name="hsAward">
+    <input type="hidden" id="hiddenTotalAward" name="totalAward">
 
                 <button type="submit" id="calculateButton" disabled onclick="scrollToTop()">Calculate Award</button>
             
