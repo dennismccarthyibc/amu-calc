@@ -1,11 +1,22 @@
 
+
+    // Sample function in calculations.js for calculating fit award
 class AwardCalculator {
-    static FIT_LEVELS = {
-        'EXCEPTIONAL FIT': 3400,
-        'VERY GOOD FIT': 2400,
-        'SOLID FIT': 1300,
-        'ACCEPTABLE FIT': 0
-    };
+    static calculateFitAward(fit) {
+        switch (fit) {
+            case "Exceptional Fit":
+                return 3400;
+            case "Very Good Fit":
+                return 2400;
+            case "Solid Fit":
+                return 1300;
+            case "Acceptable Fit":
+                return 0;
+            default:
+                return 0;
+        }
+    }
+}
 
     static HS_AWARDS = [
         { hs: "Jesuit High School", state: "LA", amount: 150 },
