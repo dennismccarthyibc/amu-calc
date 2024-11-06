@@ -264,27 +264,32 @@
             const hsName = document.getElementById('highSchool').value;
             const hsState = document.getElementById('highSchool').dataset.schoolState || "";
 
+            // Debugging: log selected fit level
+            console.log("Selected Fit Level:", fit);
+
             // Calculate awards
             const gpaAward = AwardCalculator.calculateGpaAward(gpa);
             const testAward = AwardCalculator.calculateTestAward(testType, testScore);
-            const fitAward = AwardCalculator.calculateFitAward(fit);
-            const hsAward = AwardCalculator.calculateHsAward(hsName, hsState); // Calculate high school award
-
+            const fitAward = AwardCalculator.calculateFitAward(fit);  // Calculate fitAward
+            const hsAward = AwardCalculator.calculateHsAward(hsName, hsState);
             const totalAward = gpaAward + testAward + fitAward + hsAward;
+
+            // Debugging: log calculated fitAward to ensure correct value
+            console.log("Calculated Fit Award:", fitAward);
 
             // Populate hidden fields
             document.getElementById('gpaAwardInput').value = gpaAward;
             document.getElementById('testAwardInput').value = testAward;
-            document.getElementById('fitAwardInput').value = fitAward;
-            document.getElementById('hsAwardInput').value = hsAward;  // Ensure hsAward is passed
+            document.getElementById('fitAwardInput').value = fitAward;  // Populate fitAward
+            document.getElementById('hsAwardInput').value = hsAward;
             document.getElementById('totalAwardInput').value = totalAward;
 
-            // Log to verify hsAward and other values
+            // Log all awards to verify values
             console.log("Awards Calculated:", {
                 gpaAward,
                 testAward,
                 fitAward,
-                hsAward,  // Explicitly log hsAward
+                hsAward,
                 totalAward
             });
         }
@@ -293,7 +298,7 @@
         document.getElementById('gpa').addEventListener('change', updateAwards);
         document.querySelectorAll('input[name="testType"]').forEach(el => el.addEventListener('change', updateAwards));
         document.getElementById('testScore').addEventListener('change', updateAwards);
-        document.querySelectorAll('input[name="fit"]').forEach(el => el.addEventListener('change', updateAwards));
+        document.querySelectorAll('input[name="fit"]').forEach(el => el.addEventListener('change', updateAwards));  // Attach to each fit option
         document.getElementById('highSchool').addEventListener('change', updateAwards);
     });
 </script>
