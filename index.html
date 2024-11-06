@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>.award-row{display:none}</style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="G-Logo.png" alt="Logo" class="logo">
+        </div>
+
+        <!-- Award Display (initially hidden) -->
+        <div id="awardDisplay" class="award-display" style="display: none;">
+            <div class="card">
+                <h2>Verbal Award</h2>
+               <div class="award-breakdown">
+                    <!--<a href="#" 
+                       style="text-decoration: none; color: #347646;" 
+                       onclick="document.querySelectorAll('.award-row').forEach(row => row.style.display = row.style.display === 'none' ? 'block' : 'none'); return false;">
+                        View Details
+                    </a>-->
+                    <div class="award-row">
+                        <span>GPA Award:</span>
+                        <span id="gpaAward"></span>
+                    </div>
+                    <div class="award-row">
+                        <span>Test Award:</span>
+                        <span id="testAward"></span>
+                    </div>
+                    <div class="award-row">
+                        <span>Fit Award:</span>
+                        <span id="fitAward"></span>
+                    </div>
+                    <div class="award-row">
+                        <span>High School Award:</span>
+                        <span id="hsAward"></span>
+                    </div>
+                </div>
+                <div class="award-total">
+                    <span>Total Award:</span>
+                    <span id="totalAward"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Form -->
+        <div class="card calculator-form">
+            <h2>Verbal Academic Scholarship Calculator</h2>
+            <form id="scholarshipForm" style="margin-top: 22px;">
+                <div class="form-group">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label for="mobilePhone">Mobile Phone:</label>
+                            <input type="tel" id="mobilePhone" name="mobilePhone" 
+                                   pattern="[0-9]{10}" required
+                                   style="width: 100%; padding: 8px 12px; border: 1px solid #e2e8f0; 
+                                          border-radius: 6px; background-color: #fafafa; height: 40px; font-size: 17px;">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="email">Email Address:</label>
+                            <input type="email" id="email" name="email" required
+                                   style="width: 100%; padding: 8px 12px; border: 1px solid #e2e8f0; 
+                                          border-radius: 6px; background-color: #fafafa; height: 40px; font-size: 17px;">
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="form-group"><label for="sport">Sport</label>
+    <select id="sport" name="sport">
+<option value="none">Select sport...</option>
+<option value="Football">Football</option>
+<option value="Men's Baseball">Men's Baseball</option>
+<option value="Men's Basketball">Men's Basketball</option>
+<option value="Men's Cross Country">Men's Cross Country</option>
+<option value="Men's Golf">Men's Golf</option>
+<option value="Men's Rugby">Men's Rugby</option>
+<option value="Men's Soccer">Men's Soccer</option>
+<option value="Men's Swimming">Men's Swimming</option>
+<option value="Men's Tennis">Men's Tennis</option>
+<option value="Men's Track and Field">Men's Track and Field</option>
+<option value="Men's Ultimate Frisbee">Men's Ultimate Frisbee</option>
+<option value="Women's Basketball">Women's Basketball</option>
+<option value="Women's Beach Volleyball">Women's Beach Volleyball</option>
+<option value="Women's Competitive Dance">Women's Competitive Dance</option>
+<option value="Women's Cross Country">Women's Cross Country</option>
+<option value="Women's Golf">Women's Golf</option>
+<option value="Women's Lacrosse">Women's Lacrosse</option>
+<option value="Women's Soccer">Women's Soccer</option>
+<option value="Women's Softball">Women's Softball</option>
+<option value="Women's Swimming">Women's Swimming</option>
+<option value="Women's Tennnis">Women's Tennnis</option>
+<option value="Women's Track and Field">Women's Track and Field</option>
+<option value="Women's Volleyball">Women's Volleyball</option>
+                      </select></div>
+
+                <div class="form-group">
+                    <label for="gpa">High School GPA Range</label>
+                    <select id="gpa" name="gpa" required>
+                        <option value="">Select GPA range</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Standardized Test Type</label>
+                    <div class="radio-group" id="testTypeGroup">
+                        <div class="radio-option">
+                            <input type="radio" id="ACT" name="testType" value="ACT">
+                            <label for="ACT">ACT</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="SAT" name="testType" value="SAT">
+                            <label for="SAT">SAT</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="CLT" name="testType" value="CLT">
+                            <label for="CLT">CLT</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="testScoreGroup" style="display: none;">
+                    <label id="testScoreLabel">Score Range</label>
+                    <select id="testScore" name="testScore" required>
+                        <option value="">Select score range</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Fit</label>
+                    <div class="radio-group" id="fitGroup">
+                        <div class="radio-option">
+                            <input type="radio" id="acceptable" name="fit" value="Acceptable Fit">
+                            <label for="acceptable">Acceptable Fit</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="solid" name="fit" value="Solid Fit">
+                            <label for="solid">Solid Fit</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="veryGood" name="fit" value="Very Good Fit">
+                            <label for="veryGood">Very Good Fit</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="exceptional" name="fit" value="Exceptional Fit">
+                            <label for="exceptional">Exceptional Fit</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="highSchool">High School</label>
+                    <div class="search-container">
+                        <input type="text" id="highSchool" placeholder="Search by name or zip..." autocomplete="off">
+                        <div id="schoolResults" class="search-results"></div>
+                    </div>
+                </div>
+
+                <button type="submit" id="calculateButton" disabled onclick="scrollToTop()">Calculate Award</button>
+            
+   
+
+</form>
+
+            <div class="button-container" style="text-align: center; margin-top: 12px;">
+                <a style="text-decoration: none; color: #347646;" href="#" onclick="location.reload(); return false;" class="reset-button">Reset</a>
+            </div>
+            
+            <a href="#" id="sendToGoogleSheets" 
+   style="display: block; text-align: center; margin-top: 10px; color: #2563eb; text-decoration: none;">
+   Send Data to Air Table
+</a>
+
+            
+        </div>
+    </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script src="data.js"></script>
+    <script src="calculations.js"></script>
+    <script src="form-handlers.js"></script>
+    <script src="form-validation.js"></script>
+    <script src="display-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
