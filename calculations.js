@@ -3,7 +3,7 @@ class AwardCalculator {
     static FIT_LEVELS = {
         'EXCEPTIONAL FIT': 3400,
         'VERY GOOD FIT': 2400,
-        'SOLID FIT': 1000,
+        'SOLID FIT': 1300,
         'ACCEPTABLE FIT': 0
     };
 
