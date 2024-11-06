@@ -252,6 +252,50 @@
         });
     });
 </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function updateAwards() {
+            // Get values from form fields
+            const gpa = parseFloat(document.getElementById('gpa').value) || 0;
+            const testType = document.querySelector('input[name="testType"]:checked')?.value || "";
+            const testScore = parseFloat(document.getElementById('testScore').value) || 0;
+            const fit = document.querySelector('input[name="fit"]:checked')?.value || "";
+            const hsName = document.getElementById('highSchool').value;
+            const hsState = document.getElementById('highSchool').dataset.schoolState || "";
+
+            // Calculate awards, using conditions for hsAward if hsName and hsState are present
+            const gpaAward = gpa >= 3.8 ? 5000 : (gpa >= 3.6 ? 4500 : (gpa >= 3.4 ? 3500 : (gpa >= 3.2 ? 2500 : 0)));
+            const testAward = testType === "ACT" && testScore >= 30 ? 4000 : (testType === "SAT" && testScore >= 1200 ? 3000 : 0);
+            const fitAward = fit === "Exceptional Fit" ? 3000 : (fit === "Very Good Fit" ? 2000 : 0);
+            const hsAward = (hsName && hsState) ? (hsName === "Some High School" && hsState === "FL" ? 1000 : 0) : 0;  // Example logic
+            const totalAward = gpaAward + testAward + fitAward + hsAward;
+
+            // Populate hidden fields
+            document.getElementById('gpaAwardInput').value = gpaAward;
+            document.getElementById('testAwardInput').value = testAward;
+            document.getElementById('fitAwardInput').value = fitAward;
+            document.getElementById('hsAwardInput').value = hsAward;
+            document.getElementById('totalAwardInput').value = totalAward;
+
+            // Debugging line to verify hsAward and other values
+            console.log("GPA Award:", gpaAward, "Test Award:", testAward, "Fit Award:", fitAward, "HS Award:", hsAward, "Total Award:", totalAward);
+        }
+
+        // Attach the update function to input changes
+        document.getElementById('gpa').addEventListener('change', updateAwards);
+        document.querySelectorAll('input[name="testType"]').forEach(el => el.addEventListener('change', updateAwards));
+        document.getElementById('testScore').addEventListener('change', updateAwards);
+        document.querySelectorAll('input[name="fit"]').forEach(el => el.addEventListener('change', updateAwards));
+        document.getElementById('highSchool').addEventListener('change', updateAwards);
+
+        // Handle Verbal Award button click to display total award
+        document.getElementById("verbalAwardButton").addEventListener("click", function() {
+            const awardTotal = document.getElementById('totalAwardInput').value || "0";  // Default to "0" if not yet calculated
+            this.textContent = `Award Total: ${awardTotal}`;
+        });
+    });
+</script>
     
 </body>
 </html>
