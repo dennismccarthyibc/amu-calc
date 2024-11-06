@@ -253,7 +253,7 @@
     });
 </script>
 
-    <script>
+<script>
     document.addEventListener("DOMContentLoaded", function() {
         function updateAwards() {
             // Get values from form fields
@@ -264,21 +264,24 @@
             const hsName = document.getElementById('highSchool').value;
             const hsState = document.getElementById('highSchool').dataset.schoolState || "";
 
-            // Calculate awards, using conditions for hsAward if hsName and hsState are present
+            // Verify hsName and hsState values
+            console.log("High School Name:", hsName, "State:", hsState);
+
+            // Calculate awards based on conditions
             const gpaAward = gpa >= 3.8 ? 5000 : (gpa >= 3.6 ? 4500 : (gpa >= 3.4 ? 3500 : (gpa >= 3.2 ? 2500 : 0)));
             const testAward = testType === "ACT" && testScore >= 30 ? 4000 : (testType === "SAT" && testScore >= 1200 ? 3000 : 0);
             const fitAward = fit === "Exceptional Fit" ? 3000 : (fit === "Very Good Fit" ? 2000 : 0);
-            const hsAward = (hsName && hsState) ? (hsName === "Some High School" && hsState === "FL" ? 1000 : 0) : 0;  // Example logic
+            const hsAward = (hsName && hsState) ? (hsName === "Some High School" && hsState === "FL" ? 1000 : 0) : 0;
             const totalAward = gpaAward + testAward + fitAward + hsAward;
 
             // Populate hidden fields
             document.getElementById('gpaAwardInput').value = gpaAward;
             document.getElementById('testAwardInput').value = testAward;
             document.getElementById('fitAwardInput').value = fitAward;
-            document.getElementById('hsAwardInput').value = hsAward;
+            document.getElementById('hsAwardInput').value = hsAward;  // This should now update correctly
             document.getElementById('totalAwardInput').value = totalAward;
 
-            // Debugging line to verify hsAward and other values
+            // Output debugging for award components
             console.log("GPA Award:", gpaAward, "Test Award:", testAward, "Fit Award:", fitAward, "HS Award:", hsAward, "Total Award:", totalAward);
         }
 
