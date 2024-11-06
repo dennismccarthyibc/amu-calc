@@ -49,28 +49,33 @@ class FormHandlers {
     }
 
     static handleTestTypeChange(e) {
-        const testType = e.target.value;
-        const testScoreGroup = document.getElementById('testScoreGroup');
-        const testScoreSelect = document.getElementById('testScore');
-        const testScoreLabel = document.getElementById('testScoreLabel');
+    const testType = e.target.value;
+    const testScoreGroup = document.getElementById('testScoreGroup');
+    const testScoreSelect = document.getElementById('testScore');
+    const testScoreLabel = document.getElementById('testScoreLabel');
 
-        if (testType) {
-            testScoreGroup.style.display = 'block';
-            testScoreLabel.textContent = `${testType} Score Range`;
+    if (testType === 'none') {
+        // Hide the test score dropdown and set testAward to 0 for "No Test" option
+        testScoreGroup.style.display = 'none';
+        document.getElementById('hiddenTestAward').value = 0; // Ensure testAward is 0
 
-            testScoreSelect.innerHTML = '<option value="">Select score range</option>';
-            TEST_RANGES[testType].forEach(range => {
-                const option = document.createElement('option');
-                option.value = range.max;
-                option.textContent = range.label;
-                testScoreSelect.appendChild(option);
-            });
-        } else {
-            testScoreGroup.style.display = 'none';  // Hide if no test type selected
-        }
+    } else {
+        // Show the test score dropdown when a test type is selected
+        testScoreGroup.style.display = 'block';
+        testScoreLabel.textContent = `${testType} Score Range`;
 
-        FormValidation.validateForm();  // Validate form on test type change
+        // Populate test score dropdown with relevant score ranges
+        testScoreSelect.innerHTML = '<option value="">Select score range</option>';
+        TEST_RANGES[testType].forEach(range => {
+            const option = document.createElement('option');
+            option.value = range.max;
+            option.textContent = range.label;
+            testScoreSelect.appendChild(option);
+        });
     }
+
+    FormValidation.validateForm();  // Validate form on test type change
+}
 
     static handleSchoolSearch(e) {
         const searchTerm = e.target.value.trim().toLowerCase();
