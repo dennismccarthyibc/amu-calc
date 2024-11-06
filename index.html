@@ -283,6 +283,25 @@ document.getElementById('getVerbalAwardLink').addEventListener('click', (e) => {
     }
 });    
 </script>
+
+<script>
+    document.getElementById('scholarshipForm').addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevents default submission
+
+        // Calculate awards and populate hidden fields before submitting
+        const awards = calculateAwards();
+        if (!awards) {
+            console.error("Failed to calculate awards. Please check input values.");
+            return; // Exit if awards calculation failed
+        }
+
+        console.log("Form is submitting with awards:", awards);
+
+        // Programmatically submit the form after calculating awards
+        e.target.submit();
+    });
+</script>
+    
      <p style="color: #fff;">version: 11-6-24-1001</p>
 </body>
 </html>
