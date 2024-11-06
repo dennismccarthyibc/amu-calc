@@ -13,7 +13,7 @@
         <!-- Logo Section -->
         <div class="logo-container">
             <img src="G-Logo.png" alt="Logo" class="logo">
-            <p style="color: #fff;">final-v5</p>
+            <p style="color: #fff;">final-v6</p>
         </div>
 
         <!-- Award Display (initially hidden) -->
@@ -183,7 +183,7 @@
     <input type="hidden" id="hiddenHsAward" name="hsAward">
     <input type="hidden" id="hiddenTotalAward" name="totalAward">
 
-                    <p style="tect-align: center"><a href="#" id="getVerbalAwardLink" style="text-decoration: none; color: #2563eb; display: block; margin-bottom: 16px;">Get Verbal Award</a></p>
+                    <p style="text-align: center"><a href="#" id="getVerbalAwardLink" style="text-decoration: none; color: #2563eb; display: block; margin-bottom: 16px;">Get Verbal Award</a></p>
 <h2 style="text-align: center;" id="verbalAwardDisplay" style="display: none;"></h2>
                 <button type="submit" id="calculateButton" disabled">Save</button>
             
@@ -195,10 +195,10 @@
                 <a style="text-decoration: none; color: #347646;" href="#" onclick="location.reload(); return false;" class="reset-button">Reset</a>
             </div>
             
-            <a href="#" id="sendToGoogleSheets" 
+            <!--<a href="#" id="sendToGoogleSheets" 
    style="display: block; text-align: center; margin-top: 10px; color: #2563eb; text-decoration: none;">
    Send Data to Air Table
-</a>
+</a>-->
 
             
         </div>
@@ -232,42 +232,53 @@
     document.getElementById('verbalAwardDisplay').style.display = 'block';
 });</script>
 
-<script>document.getElementById('getVerbalAwardLink').addEventListener('click', (e) => {
+<script>
+document.getElementById('getVerbalAwardLink').addEventListener('click', (e) => {
     e.preventDefault();
 
     try {
-        // Calculate award values
-        const gpaAward = AwardCalculator.calculateGpaAward(parseFloat(document.getElementById('gpa').value));
-        const testAward = AwardCalculator.calculateTestAward(document.querySelector('input[name="testType"]:checked').value, parseFloat(document.getElementById('testScore').value));
-        const fitAward = AwardCalculator.calculateFitAward(document.querySelector('input[name="fit"]:checked').value);
-        const hsAward = parseInt(document.getElementById('highSchool').dataset.schoolScore) || 0;
+        // Fetch input values and calculate award components
+        const gpa = parseFloat(document.getElementById('gpa').value);
+        const testType = document.querySelector('input[name="testType"]:checked')?.value;
+        const testScore = parseFloat(document.getElementById('testScore').value);
+        const fit = document.querySelector('input[name="fit"]:checked')?.value;
+        const hsScore = parseInt(document.getElementById('highSchool').dataset.schoolScore) || 0;
+
+        if (!gpa || !testType || isNaN(testScore) || !fit) {
+            console.warn("One or more required fields are missing or invalid:", { gpa, testType, testScore, fit, hsScore });
+            return; // Exit if any required field is missing
+        }
+
+        const gpaAward = AwardCalculator.calculateGpaAward(gpa);
+        const testAward = AwardCalculator.calculateTestAward(testType, testScore);
+        const fitAward = AwardCalculator.calculateFitAward(fit);
+        const hsAward = hsScore;
         const totalAward = gpaAward + testAward + fitAward + hsAward;
 
         // Display total award in the verbal award display section
         document.getElementById('verbalAwardDisplay').textContent = `Total Award: ${AwardCalculator.formatCurrency(totalAward)}`;
         document.getElementById('verbalAwardDisplay').style.display = 'block';
 
-        // Populate hidden fields
+        // Populate hidden fields and log each field to verify
         document.getElementById('hiddenGpaAward').value = gpaAward;
         document.getElementById('hiddenTestAward').value = testAward;
         document.getElementById('hiddenFitAward').value = fitAward;
         document.getElementById('hiddenHsAward').value = hsAward;
         document.getElementById('hiddenTotalAward').value = totalAward;
 
-        console.log("Hidden fields populated successfully:", {
-            gpaAward,
-            testAward,
-            fitAward,
-            hsAward,
-            totalAward
+        console.log("Hidden fields updated:", {
+            gpaAward: document.getElementById('hiddenGpaAward').value,
+            testAward: document.getElementById('hiddenTestAward').value,
+            fitAward: document.getElementById('hiddenFitAward').value,
+            hsAward: document.getElementById('hiddenHsAward').value,
+            totalAward: document.getElementById('hiddenTotalAward').value
         });
 
     } catch (error) {
         console.error("Error populating hidden fields or calculating awards:", error);
     }
-});
-
-});</script>
+});    
+</script>
     
 </body>
 </html>
